@@ -1,0 +1,63 @@
+package estructuras;
+
+public class ListaEnlazada<T> {
+
+    private static class Nodo<T> {
+        T dato;
+        Nodo<T> siguiente;
+
+        Nodo(T dato) {
+            this.dato = dato;
+            this.siguiente = null;
+        }
+    }
+
+    private Nodo<T> cabeza;
+    private int tamano;
+
+    public ListaEnlazada() {
+        this.cabeza = null;
+        this.tamano = 0;
+    }
+
+    public void agregar(T dato) {
+        Nodo<T> nuevo = new Nodo<>(dato);
+        if (cabeza == null) {
+            cabeza = nuevo;
+        } else {
+            Nodo<T> actual = cabeza;
+            while (actual.siguiente != null) {
+                actual = actual.siguiente;
+            }
+            actual.siguiente = nuevo;
+        }
+        tamano++;
+    }
+
+    public T obtener(int indice) {
+        if (indice < 0 || indice >= tamano)
+            return null;
+        Nodo<T> actual = cabeza;
+        for (int i = 0; i < indice; i++) {
+            actual = actual.siguiente;
+        }
+        return actual.dato;
+    }
+
+    public int tamano() {
+        return tamano;
+    }
+
+    public boolean estaVacia() {
+        return tamano == 0;
+    }
+
+    public void imprimir() {
+        Nodo<T> actual = cabeza;
+        while (actual != null) {
+            System.out.print(actual.dato + " -> ");
+            actual = actual.siguiente;
+        }
+        System.out.println("null");
+    }
+}

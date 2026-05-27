@@ -5,10 +5,10 @@ public class Pila<T> {
     private static class Nodo<T> {
         T dato;
         Nodo<T> siguiente;
- 
-      Nodo(T dato) {
-          this.dato = dato;
-          this.siguiente = null;
+
+        Nodo(T dato) {
+            this.dato = dato;
+            this.siguiente = null;
         }
     }
 
@@ -53,8 +53,7 @@ public class Pila<T> {
 
 
     @SuppressWarnings("unchecked")
-    public T[] obtenerUl
-            imos(int cantidad) {
+    public T[] obtenerUltimos(int cantidad) {
         int limite = Math.min(cantidad, tamano);
         Object[] resultado = new Object[limite];
         Nodo<T> actual = tope;
@@ -65,5 +64,3 @@ public class Pila<T> {
         return (T[]) resultado;
     }
 }
-
-            

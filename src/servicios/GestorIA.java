@@ -40,6 +40,7 @@ public class GestorIA {
     }
 
     public String generarMensajeDado(String nombre, int valorDado) {
-        return nombre + " (Maquina) lanza el dado automaticamente... obtuvo: " + valorDado;
+        return nombre + " (Maquina) lanza el dado automaticamente... obtuvo: "
+                + valorDado;
     }
 }

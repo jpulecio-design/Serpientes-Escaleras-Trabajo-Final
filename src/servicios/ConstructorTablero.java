@@ -8,7 +8,7 @@ import modelo.TipoCasilla;
 public class ConstructorTablero {
 
     private static final int TOTAL_CASILLAS = 50;
-
+    //Configuracion casillas especiales
     private final int[] escaleraOrigen = { 4, 9, 20, 28, 40 };
     private final int[] escaleraDestino = { 14, 31, 38, 44, 47 };
 
@@ -17,6 +17,10 @@ public class ConstructorTablero {
 
     private final int[] casillasReto = { 6, 12, 18, 24, 30, 35, 43 };
 
+    /*
+     * Construye la lista enlazada con todas las casillas del tablero
+     * Complejidad: O(n)
+     */
     public ListaEnlazada<Casilla> construirTablero() {
         ListaEnlazada<Casilla> tablero = new ListaEnlazada<>();
 
@@ -31,7 +35,7 @@ public class ConstructorTablero {
                     break;
                 }
             }
-
+            //Verifica si es serpiente
             if (tipo == TipoCasilla.NORMAL) {
                 for (int i = 0; i < serpienteOrigen.length; i++) {
                     if (numero == serpienteOrigen[i]) {
@@ -41,7 +45,7 @@ public class ConstructorTablero {
                     }
                 }
             }
-
+            //Verifica si es reto 
             if (tipo == TipoCasilla.NORMAL) {
                 for (int casilla : casillasReto) {
                     if (numero == casilla) {
@@ -56,14 +60,19 @@ public class ConstructorTablero {
         return tablero;
     }
 
+    /*
+     * Construye el grafo de conexiones especiales del tablero
+     * Inserta aristas para escaleras (ESCALERA) y serpientes (SERPIENTE)
+     * Complejidad: O(e + s) donde e son escaleras y s son serpientes
+     */
     public Grafo construirGrafo() {
         Grafo grafo = new Grafo();
-
+        //Escaleras
         for (int i = 0; i < escaleraOrigen.length; i++) {
             grafo.agregarArista(escaleraOrigen[i], escaleraDestino[i],
                     "ESCALERA");
         }
-
+        //Serpientes
         for (int i = 0; i < serpienteOrigen.length; i++) {
             grafo.agregarArista(serpienteOrigen[i], serpienteDestino[i],
                     "SERPIENTE");
@@ -72,6 +81,10 @@ public class ConstructorTablero {
         return grafo;
     }
 
+    /*
+     * Retorna la casilla correspondiente al numero dado
+     * Complejidad: O(n)
+     */
     public Casilla obtenerCasilla(ListaEnlazada<Casilla> tablero, int numero) {
         for (int i = 0; i < tablero.tamano(); i++) {
             Casilla casilla = tablero.obtener(i);

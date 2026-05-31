@@ -19,14 +19,14 @@ import consola.GestorEntrada;
 
 import java.util.Random;
 
-/**
- * Servicio principal del juego. Contiene el bucle de juego completo.
- * Coordina el tablero, los jugadores, los turnos, las preguntas y el historial.
+/*
+ * Servicio principal del juego. Contiene el bucle de juego completo
+ * Coordina el tablero, los jugadores, los turnos, las preguntas y el historial
  *
  * Responsabilidades:
  *   - Gestionar el bucle principal hasta haber un ganador
  *   - Coordinar todas las estructuras de datos
- *   - Aplicar las reglas del juego (incluido el turno extra real)
+ *   - Aplicar las reglas del juego, incluido el turno extra real
  *   - Delegar renderizado y entrada a los modulos correspondientes
  */
 public class JuegoServicio {
@@ -51,14 +51,8 @@ public class JuegoServicio {
     private Random random;
     private Jugador ganador;
 
-    /**
-     * Construye el servicio de juego con todas sus dependencias.
-     *
-     * @param tablero         lista enlazada del tablero
-     * @param grafoConexiones grafo de escaleras y serpientes
-     * @param arbolPreguntas  BST de preguntas por dificultad
-     * @param renderizador    modulo de renderizado ASCII
-     * @param gestorEntrada   modulo de entrada por teclado
+    /*
+     * Construye el servicio de juego con todas sus dependencias
      */
     public JuegoServicio(ListaEnlazada<Casilla> tablero, Grafo grafoConexiones,
                         ArbolBinarioBusqueda arbolPreguntas,
@@ -80,11 +74,9 @@ public class JuegoServicio {
         this.ganador = null;
     }
 
-    /**
-     * Registra a los jugadores en la cola de turnos y en la tabla hash.
+    /*
+     * Registra a los jugadores en la cola de turnos y en la tabla hash
      * Complejidad: O(n) donde n es el numero de jugadores
-     *
-     * @param jugadores arreglo de jugadores a registrar
      */
     public void registrarJugadores(Jugador[] jugadores) {
         for (Jugador jugador : jugadores) {
@@ -93,8 +85,8 @@ public class JuegoServicio {
         }
     }
 
-    /**
-     * Ejecuta el bucle principal del juego hasta que haya un ganador.
+    /*
+     * Ejecuta el bucle principal del juego hasta que haya un ganador
      * Complejidad: O(t * n) donde t es el numero de turnos y n el de jugadores
      */
     public void ejecutar() {
@@ -129,12 +121,12 @@ public class JuegoServicio {
 
             jugarTurnoCompleto(jugadorActual);
 
-            // Si gano durante el turno, salir del bucle.
+            // Si gano durante el turno, salir del bucle
             if (ganador != null) {
                 break;
             }
 
-            // Reencolar al final (rotacion normal de turnos).
+            // Reencolar al final; rotacion normal de turnos
             colaJugadores.encolar(jugadorActual);
 
             renderizador.imprimirTablero(tablero, estadoJugadores, META);
@@ -145,13 +137,11 @@ public class JuegoServicio {
         finalizarJuego();
     }
 
-    /**
+    /*
      * Juega el turno completo de un jugador, incluyendo los turnos extra que
      * gane por acertar retos. El jugador vuelve a tirar inmediatamente mientras
-     * acierte, hasta un limite de seguridad o hasta llegar a la meta.
+     * acierte, hasta un limite de seguridad o hasta llegar a la meta
      * Complejidad: O(k * n) donde k es el numero de turnos extra encadenados
-     *
-     * @param jugador jugador en turno
      */
     private void jugarTurnoCompleto(Jugador jugador) {
         boolean turnoExtra = true;
@@ -182,11 +172,8 @@ public class JuegoServicio {
     }
 
     /**
-     * Procesa un turno individual (un lanzamiento de dado) de un jugador.
+     * Procesa un turno individual ,un lanzamiento de dado, de un jugador
      * Complejidad: O(n) por consultas al tablero y grafo
-     *
-     * @param jugador jugador cuyo turno se procesa
-     * @return true si el jugador gana un turno extra (acerto un reto)
      */
     private boolean procesarTurno(Jugador jugador) {
         int valorDado = lanzarDado(jugador);
@@ -242,12 +229,9 @@ public class JuegoServicio {
         return turnoExtra;
     }
 
-    /**
-     * Lanza el dado para un jugador (humano o maquina).
+    /*
+     * Lanza el dado para un jugador; humano o maquina.
      * Complejidad: O(1)
-     *
-     * @param jugador jugador que lanza el dado
-     * @return valor del dado (1-6)
      */
     private int lanzarDado(Jugador jugador) {
         int valor;
@@ -264,15 +248,11 @@ public class JuegoServicio {
         return valor;
     }
 
-    /**
+    /*
      * Procesa la casilla de reto: busca pregunta, solicita respuesta y aplica
      * el resultado. Acierto concede turno extra; fallo hace perder el proximo
-     * turno (una sola penalizacion, segun el enunciado).
+     * turno; una sola penalizacion, segun el enunciado
      * Complejidad: O(log n) por busqueda en BST
-     *
-     * @param jugador       jugador que debe responder
-     * @param numeroCasilla numero de la casilla de reto
-     * @return true si el jugador acerto la pregunta (turno extra)
      */
     private boolean procesarReto(Jugador jugador, int numeroCasilla) {
         int dificultad = calcularDificultadSegunCasilla(numeroCasilla);
@@ -318,12 +298,9 @@ public class JuegoServicio {
         }
     }
 
-    /**
-     * Determina la dificultad de la pregunta segun el numero de casilla.
+    /*
+     * Determina la dificultad de la pregunta segun el numero de casilla
      * Complejidad: O(1)
-     *
-     * @param casilla numero de la casilla de reto
-     * @return nivel de dificultad (1, 2 o 3)
      */
     private int calcularDificultadSegunCasilla(int casilla) {
         if (casilla <= 17) return 1;
@@ -331,15 +308,9 @@ public class JuegoServicio {
         return 3;
     }
 
-    /**
-     * Registra un movimiento en la pila de historial.
+    /*
+     * Registra un movimiento en la pila de historial
      * Complejidad: O(1)
-     *
-     * @param jugador          jugador que realizo el movimiento
-     * @param posicionAnterior casilla de origen
-     * @param posicionNueva    casilla de destino final
-     * @param valorDado        resultado del dado
-     * @param descripcion      descripcion del evento
      */
     private void registrarMovimiento(Jugador jugador, int posicionAnterior,
             int posicionNueva, int valorDado, String descripcion) {
@@ -348,8 +319,8 @@ public class JuegoServicio {
         historialMovimientos.apilar(movimiento);
     }
 
-    /**
-     * Imprime las ultimas N jugadas del historial desde la pila.
+    /*
+     * Imprime las ultimas N jugadas del historial desde la pila
      * Complejidad: O(k) donde k es ULTIMAS_JUGADAS
      */
     private void imprimirHistorialReciente() {
@@ -367,7 +338,7 @@ public class JuegoServicio {
         }
     }
 
-    /**
+    /*
      * Finaliza el juego mostrando el resultado y el ranking.
      * Complejidad: O(n log n) por insercion en BST de ranking
      */

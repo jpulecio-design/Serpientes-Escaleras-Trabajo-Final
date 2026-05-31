@@ -12,10 +12,6 @@ public class RenderizadorTablero {
     /**
      * Dibuja el tablero completo en consola con posiciones de todos los jugadores.
      * Complejidad: O(n * j)
-     *
-     * @param tablero         lista enlazada con las casillas
-     * @param estadoJugadores tabla hash con el estado actual de cada jugador
-     * @param meta            numero de la casilla meta
      */
     public void imprimirTablero(ListaEnlazada<Casilla> tablero,
             TablaHash<String, Jugador> estadoJugadores,
@@ -71,12 +67,8 @@ public class RenderizadorTablero {
     }
 
     /**
-     * Obtiene el simbolo de tipo de una casilla.
+     * Obtiene el simbolo de tipo de una casilla
      * Complejidad: O(1)
-     *
-     * @param casilla casilla a evaluar
-     * @param meta    numero de casilla meta
-     * @return simbolo de tipo entre corchetes
      */
     private String obtenerSimboloTipo(Casilla casilla, int meta) {
         if (casilla == null)
@@ -98,19 +90,19 @@ public class RenderizadorTablero {
     private String obtenerJugadoresEnCasilla(int numeroCasilla,
             TablaHash<String, Jugador> estadoJugadores) {
         Object[] jugadores = estadoJugadores.obtenerTodosLosValores();
-        StringBuilder sb = new StringBuilder();
+        StringBuilder stringbuilder = new StringBuilder();
         for (Object obj : jugadores) {
             if (obj instanceof Jugador) {
                 Jugador j = (Jugador) obj;
                 if (j.getPosicion() == numeroCasilla) {
-                    if (sb.length() > 0)
-                        sb.append(",");
-                    sb.append(j.getNombre().substring(0,
+                    if (stringbuilder.length() > 0)
+                        stringbuilder.append(",");
+                    stringbuilder.append(j.getNombre().substring(0,
                             Math.min(2, j.getNombre().length())).toUpperCase());
                 }
             }
         }
-        return sb.toString();
+        return stringbuilder.toString();
     }
 
     private void imprimirEstadoJugadores(

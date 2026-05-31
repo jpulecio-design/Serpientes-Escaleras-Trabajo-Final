@@ -1,5 +1,5 @@
 package estructuras;
-
+//Nodo de la carpeta en cada cubeta
 public class TablaHash<K, V> {
 
     private static class NodoHash<K, V> {
@@ -31,6 +31,10 @@ public class TablaHash<K, V> {
         this.tamano = 0;
     }
 
+    /*
+     * Calcula el indice de cubeta para una clave dada
+     * Complejidad: O(1)
+     */
     private int calcularIndice(K clave) {
         if (clave == null)
             return 0;
@@ -40,6 +44,10 @@ public class TablaHash<K, V> {
         return hash % capacidad;
     }
 
+    /*
+     * Inserta o actualiza un par clave-valor
+     * Complejidad: O(1) promedio
+     */
     @SuppressWarnings("unchecked")
     public void insertar(K clave, V valor) {
         int indice = calcularIndice(clave);
@@ -57,6 +65,10 @@ public class TablaHash<K, V> {
         tamano++;
     }
 
+    /*
+     * Busca y retorna el valor asociado a una clave
+     * Complejidad: O(1) promedio
+     */
     @SuppressWarnings("unchecked")
     public V buscar(K clave) {
         int indice = calcularIndice(clave);
@@ -70,10 +82,18 @@ public class TablaHash<K, V> {
         return null;
     }
 
+    /*
+     * Verifica si existe una clave en la tabla
+     * Complejidad: O(1) promedio
+     */
     public boolean contiene(K clave) {
         return buscar(clave) != null;
     }
 
+    /*
+     * Retorna todos los valores almacenados en la tabla
+     * Complejidad: O(n + capacidad)
+     */
     @SuppressWarnings("unchecked")
     public Object[] obtenerTodosLosValores() {
         Object[] valores = new Object[tamano];

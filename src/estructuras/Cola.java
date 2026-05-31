@@ -2,6 +2,9 @@ package estructuras;
 
 public class Cola<T> {
 
+    /*
+     * Nodo interno de la cola
+     */
     private static class Nodo<T> {
         T dato;
         Nodo<T> siguiente;
@@ -21,7 +24,10 @@ public class Cola<T> {
         this.final_ = null;
         this.tamano = 0;
     }
-
+    /*
+     * Agrega un elemento al final de la cola
+     * Complejidad: O(1)
+     */
     public void encolar(T dato) {
         Nodo<T> nuevo = new Nodo<>(dato);
         if (final_ == null) {
@@ -34,6 +40,10 @@ public class Cola<T> {
         tamano++;
     }
 
+    /*
+     * Extrae y retorna el elemento del frente de la cola
+     * Complejidad: O(1)
+     */
     public T desencolar() {
         if (estaVacia())
             return null;

@@ -1,7 +1,7 @@
 package estructuras;
 
 public class Pila<T> {
-
+    //Nodo interno de la pila
     private static class Nodo<T> {
         T dato;
         Nodo<T> siguiente;
@@ -20,7 +20,11 @@ public class Pila<T> {
         this.tamano = 0;
     }
 
-   
+
+    /*
+     * Apila un elemento en el tope de la pila
+     * Complejidad: O(1)
+     */   
     public void apilar(T dato) {
         Nodo<T> nuevo = new Nodo<>(dato);
         nuevo.siguiente = tope;

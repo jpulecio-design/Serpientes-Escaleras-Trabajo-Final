@@ -27,7 +27,7 @@ Collections, etc.).
 
 ## Estructuras de datos implementadas manualmente
 
-|------------------|--------------------------------------------------------------------------------|
+
 | Estructura       | Uso en el juego                                        | Clase                  |
 |------------------|--------------------------------------------------------|------------------------|
 | Lista enlazada   | Tablero de 50 casillas                                 | `ListaEnlazada<T>`     |
@@ -36,7 +36,7 @@ Collections, etc.).
 | Tabla hash       | Estado rapido de jugadores por nombre                  | `TablaHash<K,V>`       |
 | Arbol BST        | Preguntas organizadas por dificultad (1-3)             | `ArbolBinarioBusqueda` |
 | Grafo dirigido   | Conexiones escaleras/serpientes y validacion de ciclos | `Grafo`                |
-|------------------|--------------------------------------------------------|------------------------|
+
 
 ## Estructura del proyecto
 
@@ -68,8 +68,8 @@ SerpienteEscalera/
 |        |      ├── GestorIA.java
 |        |      └── GestorRanking.java     
 |        └──App.java                 
-├──    preguntas.txt
-└──    README.md
+├── preguntas.txt
+└── README.md
 ```
 
 ## Reglas del juego
@@ -126,7 +126,6 @@ documenta su complejidad Big O. La recursividad se usa en el arbol binario y en 
 
 ## Complejidades principales
 
-|----------------------------------|-------------------|
 | Operacion                        | Complejidad       |
 |----------------------------------|-------------------|
 | Mover jugador en tablero         | O(n)              |
@@ -138,7 +137,6 @@ documenta su complejidad Big O. La recursividad se usa en el arbol binario y en 
 | Insertar / buscar en hash        | O(1) promedio     |
 | Insertar en ranking (BST)        | O(log n) promedio |
 | Renderizar tablero               | O(n * j)          |
-|----------------------------------|-------------------|
 
 ---
 

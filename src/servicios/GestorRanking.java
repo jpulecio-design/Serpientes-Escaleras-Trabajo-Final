@@ -3,7 +3,7 @@ package servicios;
 import modelo.Jugador;
 
 public class GestorRanking {
-
+    //Nodo del arbol BST de ranking
     private static class NodoRanking {
         int puntaje;
         String nombre;
@@ -30,10 +30,17 @@ public class GestorRanking {
         this.raiz = null;
     }
 
+    /*
+     * Inserta un jugador en el arbol de ranking por puntaje
+     * Complejidad: O(log n) promedio
+     */
     public void insertarJugador(Jugador jugador) {
         raiz = insertarRecursivo(raiz, jugador);
     }
 
+    /*
+     * Insercion recursiva en BST por puntaje
+     */
     private NodoRanking insertarRecursivo(NodoRanking nodo, Jugador jugador) {
         if (nodo == null)
             return new NodoRanking(jugador);
@@ -46,6 +53,11 @@ public class GestorRanking {
         return nodo;
     }
 
+    /*
+     * Imprime el ranking en orden descendente de puntaje
+     * Recorre el arbol en orden inverso 
+     * Complejidad: O(n)
+     */
     public void imprimirRanking() {
         System.out.println();
         System.out.println("===========================================");

@@ -10,19 +10,11 @@ import modelo.Jugador;
 import servicios.CargadorPreguntas;
 import servicios.ConstructorTablero;
 
-/**
- * Clase de entrada principal del programa.
- * Solo inicializa los componentes y delega la ejecucion.
- *
- * Responsabilidad unica: iniciar el programa.
+/*
+ * Responsabilidad iniciar el programa
  */
 public class App {
 
-    /**
-     * Metodo principal del programa.
-     *
-     * @param args argumentos de linea de comandos (no utilizados)
-     */
     public static void main(String[] args) {
         GestorEntrada gestorEntrada = new GestorEntrada();
         MenuPrincipal menu = new MenuPrincipal(gestorEntrada);

@@ -2,6 +2,7 @@ package estructuras;
 
 public class ListaEnlazada<T> {
 
+    //Nodo interno de la lista enlazada
     private static class Nodo<T> {
         T dato;
         Nodo<T> siguiente;
@@ -20,6 +21,10 @@ public class ListaEnlazada<T> {
         this.tamano = 0;
     }
 
+    /*
+     * Agrega un elemento al final de la lista
+     * Complejidad: O(n)
+     */
     public void agregar(T dato) {
         Nodo<T> nuevo = new Nodo<>(dato);
         if (cabeza == null) {
@@ -34,6 +39,10 @@ public class ListaEnlazada<T> {
         tamano++;
     }
 
+    /*
+     * Obtiene el elemento en la posicion indicada (0 posicion)
+     * Complejidad: O(n)
+     */
     public T obtener(int indice) {
         if (indice < 0 || indice >= tamano)
             return null;
@@ -51,7 +60,10 @@ public class ListaEnlazada<T> {
     public boolean estaVacia() {
         return tamano == 0;
     }
-
+    /*
+     * Recorre la lista e imprime todos los elementos
+     * Complejidad: O(n)
+     */
     public void imprimir() {
         Nodo<T> actual = cabeza;
         while (actual != null) {
